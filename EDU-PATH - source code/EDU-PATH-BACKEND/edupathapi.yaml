@@ -1,0 +1,677 @@
+openapi: 3.0.3
+info:
+  title: EduPath API
+  version: 1.0.0.0.0
+servers:
+  - url: http//127.0.0.1:5000
+  - url: https://edu-path-backend.jallipalli-phan.repl.co/
+    variables: {}
+paths:
+  /signup:
+    summary: to sign up the Users
+    post:
+      summary: to sign up
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userid:
+                  type: string
+                  example: 21f3002478
+                password:
+                  type: string
+                  example: password123
+                role:
+                  type: string
+                  example: student/admin/instructor
+      responses:
+        '201':
+          description: User created successfully
+          content:
+            application/json:
+              examples:
+                Sample 201 response:
+                  value: User created successfully
+        '409':
+          description: User already exists
+          content:
+            application/json:
+              examples:
+                Sample 409 response:
+                  value: User already exists
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              examples:
+                Sample 500 response:
+                  value: Internal server error
+    put:
+      summary: to update sign up details
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userid:
+                  type: string
+                  example: 21f3002478
+                password:
+                  type: string
+                  example: password123
+                role:
+                  type: string
+                  example: student
+      responses:
+        '204':
+          description: Sign up details updated success
+          content:
+            application/json:
+              examples:
+                Sample 204 response:
+                  value: Signup details updated success
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              examples:
+                Sample 500 response:
+                  value: Internal server error
+  /login:
+    summary: to log in
+    post:
+      summary: To log in
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userid:
+                  type: string
+                  example: 21f3002478
+                password:
+                  type: string
+                  example: password123
+                role:
+                  type: string
+                  example: student
+      responses:
+        '200':
+          description: Userid and password matches
+          content:
+            application/json:
+              examples:
+                Sample 200 response:
+                  value: Userid and password matches. logged in successfully
+        '401':
+          description: Incorrect fields
+          content:
+            application/json:
+              examples:
+                Sample 401 response:
+                  value: Incorrect fields
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              examples:
+                Sample 500 response:
+                  value: Internal server error
+  /student_dasboard/student_details/{studentId}:
+    get:
+      summary: retrieve student details
+      parameters:
+        - name: studentId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful retrival
+          content:
+            application/json:
+              examples:
+                Sample 200 response:
+                  value:
+                    id: 21f3002478
+                    name: phani
+                    email: 21f3002478@study.iitm.ac.in
+                    gender: M
+                    dob: 15/04/2000
+                    blood_group: B+
+                    mobile: 8317566776
+                    address: Eluru,Andhra pradesh
+        '401':
+          description: Access not possible
+          content:
+            application/json:
+              examples:
+                Sample 401 response:
+                  value: Access not possible
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              examples:
+                Sample 500 respose:
+                  value: Internal server error
+    post:
+      summary: to add a student
+      parameters:
+        - name: studentId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Updated student details
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  example: student.studentId
+                name:
+                  type: string
+                  example: student.name
+                email:
+                  type: string
+                  example: student.email
+                gender:
+                  type: string
+                  example: student.gender
+                dob:
+                  type: string
+                  example: student.dob
+                blood_group:
+                  type: string
+                  example: student.blood_gorup
+                mobile:
+                  type: string
+                  example: student.mobile
+                address:
+                  type: string
+                  example: student.address
+      responses:
+        '201':
+          description: Student created successfully
+          content:
+            application/json:
+              examples:
+                Sample 201 response:
+                  value: Student created successfully
+        '409':
+          description: Student details already exists
+          content:
+            application/json:
+              examples:
+                Sample 409 response:
+                  value: Student details already exists
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              examples:
+                Sample 500 response:
+                  value: Internal server error
+    put:
+      summary: to update student details
+      parameters:
+        - name: studentId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Updated student details
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  example: student.studentId
+                name:
+                  type: string
+                  example: student.name
+                email:
+                  type: string
+                  example: student.email
+                gender:
+                  type: string
+                  example: student.gender
+                dob:
+                  type: string
+                  example: student.dob
+                blood_group:
+                  type: string
+                  example: student.blood_gorup
+                mobile:
+                  type: string
+                  example: student.mobile
+                address:
+                  type: string
+                  example: student.address
+      responses:
+        '201':
+          description: Student details updated successfully
+          content:
+            application/json:
+              examples:
+                Sample 201 response:
+                  value: Student details updated successfully
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              examples:
+                Sample 500 response:
+                  value: Internal server error
+  /student_dasboard/student_courses/{studentId}:
+    get:
+      summary: to retrieve selected course details of students
+      parameters:
+        - name: studentId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Student course details retrieved successfully
+          content:
+            application/json:
+              examples:
+                Sample 200 response:
+                  value:
+                    - course_id: course id
+                      course_name: course name
+                      course_instructor: course instructor
+                      term: term of the course
+                    - course_id: course id
+                      course_name: course name
+                      course_instructor: course instructor
+                      term: term of the course
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              examples:
+                Sample 500 response:
+                  value: Internal server error
+    post:
+      summary: To add courses to students
+      parameters:
+        - name: studentId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Updated student details
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  example: student.studentId
+                course_id:
+                  type: string
+                  example: student.course_id
+                course_name:
+                  type: string
+                  example: student.course_name
+                course_instructor:
+                  type: string
+                  example: student.course_instructor
+                term:
+                  type: string
+                  example: term of the course
+      responses:
+        '201':
+          description: Students courses created successfully
+          content:
+            application/json:
+              examples:
+                Sample 201 response:
+                  value: Student courses created successfully
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              examples:
+                Sample 500 response:
+                  value: Internal server error
+  /courses:
+    post:
+      summary: To add a course
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                course_name:
+                  type: string
+                  example: Computational Thinking
+                course_id:
+                  type: string
+                  example: MA032
+                course_instructor:
+                  type: string
+                  example: course instructor
+                term:
+                  type: string
+                  example: Jan2023
+      responses:
+        '201':
+          description: Course created successfully
+          content:
+            application/json:
+              examples:
+                Sample 201 response:
+                  value: Course created successfully
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              examples:
+                Sample 500 response:
+                  value: Internal server error
+
+  /feedback/{studentId}/{course_id}:
+    get:
+      summary: To view the feedbacks
+      parameters:
+        - name: studentId
+          in: path
+          required: true
+          description: The ID of the student
+          schema:
+            type: integer
+        - name: course_id
+          in: path
+          required: true
+          description: The ID of the course
+          schema:
+            type: integer
+      responses:
+        '201':
+          description: Feedback retreived successfully
+          content:
+            application/json:
+              examples:
+                Sample 201 response:
+                  value:
+                    - Course_id: course id
+                      Student_feedback: user/student feedback
+                      Term: term of the feedback
+        '401':
+          description: Access not possible
+          content:
+            application/json:
+              examples:
+                Sample 401 response:
+                  value: Access not possible
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              examples:
+                Sample 500 response:
+                  value: Internal server error
+    post:
+      summary: to add feedback
+      parameters:
+        - name: studentId
+          in: path
+          required: true
+          description: The ID of the student
+          schema:
+            type: integer
+        - name: course_id
+          in: path
+          required: true
+          description: The ID of the course
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                course_id:
+                  type: string
+                  example: MA032
+                student_feedback:
+                  type: string
+                  example: feedback
+                term:
+                  type: string
+                  example: Jan2023
+      responses:
+        '201':
+          description: Feedback added successfully
+          content:
+            application/json:
+              examples:
+                Sample 201 response:
+                  value: Feedback added successfully
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              examples:
+                Sample 500 response:
+                  value: Internal server error
+  /learning_path/{studentId}:
+    get:
+      summary: To recommend a customized learning path
+      parameters:
+        - name: studentId
+          in: path
+          required: true
+          description: The ID of the student
+          schema:
+            type: integer
+      responses:
+        '201':
+          description: learning path generated successfully
+          content:
+            application/json:
+              examples:
+                Sample 201 response:
+                  value:
+                    - learning_path1:
+                        - term1:
+                            - course1
+                            - course2
+                            - course3
+                        - term2:
+                            - course1
+                            - course2
+                            - course3
+                    - learning_path2:
+                        - term1:
+                            - course1
+                            - course2
+                            - course3
+                        - term2:
+                            - course1
+                            - course2
+                            - course3
+                    - learning_path3:
+                        - term1:
+                            - course1
+                            - course2
+                            - course3
+                        - term2:
+                            - course1
+                            - course2
+                            - course3
+        '401':
+          description: Access not possible
+          content:
+            application/json:
+              examples:
+                Sample 401 response:
+                  value: Access not possible
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              examples:
+                Sample 500 response:
+                  value: Internal server error
+  /instructor_dashboard/stats/{course_id}/{instructor_id}:
+    get:
+      summary: To get course related stats
+      parameters:
+        - name: course_id
+          in: path
+          required: true
+          description: The ID of the course
+          schema:
+            type: integer
+        - name: instructor_id
+          in: path
+          required: true
+          description: The ID of the instructor
+          schema:
+            type: integer
+      responses:
+        '201':
+          description: course stats retrieved successfully
+          content:
+            application/json:
+              examples:
+                Sample 201 response:
+                  value:
+                    Course_id: MA032
+                    Reviews_percentage = 70: null
+                    Postitve_reviews_percentage: 30
+        '401':
+          description: Access not possible
+          content:
+            application/json:
+              examples:
+                Sample 401 response:
+                  value: Access not possible
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              examples:
+                Sample 500 response:
+                  value: Internal server error
+  /instructorfeedback/{InstructorId}/{course_id}:
+    get:
+      summary: To view the feedbacks
+      parameters:
+        - name: InstructorId
+          in: path
+          required: true
+          description: The ID of the instructor
+          schema:
+            type: string
+        - name: course_id
+          in: path
+          required: true
+          description: The ID of the course
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Feedback retreived successfully
+          content:
+            application/json:
+              examples:
+                Sample 201 response:
+                  value:
+                    - Course_id: course id
+                      feedbacks:
+                        - term: term
+                          term_feedbacks:
+                            - feedback1
+                            - feedback2
+                            - feedback3
+                        - term: term
+                          term_feedbacks:
+                            - feedback1
+                            - feedback2
+                            - feedback3
+        '401':
+          description: Access not possible
+          content:
+            application/json:
+              examples:
+                Sample 401 response:
+                  value: Access not possible
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              examples:
+                Sample 500 response:
+                  value: Internal server error
+  /notification:
+    post:
+      summary: To send notifications to students
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                studentId:
+                  type: integer
+                  description: The ID of the student
+                email:
+                  type: string
+                  format: email
+                  description: The email address for receiving notifications
+                message:
+                  type: string
+                  description: The content of the notification message
+              required:
+                - studentId
+                - email
+                - message
+      responses:
+        '201':
+          description: Notification sent successfully
+          content:
+            application/json:
+              examples:
+                Sample 201 response:
+                  value: Notification sent successfully
+        '400':
+          description: Invalid input parameters
+          content:
+            application/json:
+              examples:
+                Sample 400 response:
+                  value: |
+                    Bad Request. Invalid input parameters
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              examples:
+                Sample 500 response:
+                  value: Internal server error            

@@ -1,0 +1,13 @@
+html,
+body {
+  margin: 0.5%;
+  padding: 0px;
+  height: 100%;
+}
+
+#app-container {
+  min-height: 100vh; /* Set minimum height to 100% of the viewport height */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  padding: 5px; /* Adjust padding as needed */
+}
+

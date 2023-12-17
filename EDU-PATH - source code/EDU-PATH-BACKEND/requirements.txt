@@ -1,0 +1,9 @@
+flask
+flask-SQLAlchemy
+flask-security-too
+matplotlib
+pytest
+flask-bcrypt
+flask-restful
+flask-cors
+textblob
